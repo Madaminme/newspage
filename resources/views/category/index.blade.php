@@ -17,8 +17,14 @@
                         <td>{{ $category->name }}</td>
                         <td>
                             <a href="{{ route('category.edit', $category->id) }}">Update</a>
-                            <a href="{{ route('category.delete', $category->id) }}">Delete</a>
+                            <a href="{{ route('category.delete', $category->id) }}"
+                                onclick="event.preventDefault();document.getElementById(
+                                 'delete-form-{{ $category->id }}').submit();">delete</a>
                         </td>
+                        <form id="delete-form-{{ $category->id }}" + action="{{ route('category.delete', $category->id) }}"
+                            method="post">
+                            @csrf @method('DELETE')
+                        </form>
                     </tr>
                 @endforeach
             </tbody>
