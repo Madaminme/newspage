@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
+
+    private $categoryService;
+    public function __construct(CategoryService $categoryService){
+        $this->categoryService = $categoryService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,11 +43,12 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        //Category::create($request);
-        $category = new Category;
-        $category->name = $request->name;
-        $category->save();
+        $this->categoryService->create($request->validated());
         return redirect(route("category.index"));
+
+        // $category = new Category;
+        // $category->name = $request->name;
+        // $category->save();
     }
 
     /**
@@ -76,9 +83,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $category = Category::find($id);
-        $category->name = $request['name'];
-        $category->save();
+        $this->categoryService->update($request->validated(), $id);
         return redirect(route("category.index"));
     }
 
