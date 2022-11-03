@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TagController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,5 +29,18 @@ Route::group([
     Route::get("edit{id}", [CategoryController::class, "edit"])->name("edit");
     Route::patch("update{id}", [CategoryController::class, "update"])->name("update");
     Route::delete("delete{id}", [CategoryController::class, "destroy"])->name("delete");
+}
+);
+
+Route::group([
+    "prefix" => "tag",
+    "as" => "tag."
+], function(){
+    Route::get("", [TagController::class, "index"])->name("index");
+    Route::get("create", [TagController::class, "create"])->name("create");
+    Route::put("store", [TagController::class, "store"])->name("store");
+    Route::get("edit{id}", [TagController::class, "edit"])->name("edit");
+    Route::patch("update{id}", [TagController::class, "update"])->name("update");
+    Route::delete("delete{id}", [TagController::class, "destroy"])->name("delete");
 }
 );

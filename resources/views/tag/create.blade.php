@@ -2,22 +2,17 @@
 
 @section('content')
     <h1>
-        Create new category!
+        Create new tag!
     </h1>
     <div>
-        <form action="{{ route('category.store') }}" method="POST">
+        <form action="{{ route('tag.store') }}" method="POST">
             @method('put')
             @csrf
             <div>
                 <label for="">Name</label>
                 <div>
-                    <input type="text" name="name" placeholder="Category Name">
+                    <input type="text" name="name" placeholder="Tag Name">
                 </div>
-                @error('name')
-                    <div class="alert alert-danger" role="alert">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
             <div>
                 <button>
